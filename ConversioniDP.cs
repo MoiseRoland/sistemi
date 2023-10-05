@@ -26,6 +26,8 @@ namespace ConversioniDP //Moise Roland-Adrian
             }
 
             Console.WriteLine("\n" + Convert_Dp_to_Int(dp));
+            Console.WriteLine(Convert_Bin_to_Int(bn));
+            Console.WriteLine(string.Join(".", Convert_Bin_to_DP(bn)));
 
 
             Console.ReadLine();
@@ -60,5 +62,37 @@ namespace ConversioniDP //Moise Roland-Adrian
 
             return num;
         }
+static int Convert_Bin_to_Int(bool[] bn)
+{
+    int pos = bn.Length - 1;
+    int num = 0;
+    for (int i = 0; i < bn.Length; i++)
+    {
+        if (bn[i] != false)
+            num = num + (int)Math.Pow(2, pos);
+        pos--;
+    }
+    return num;
+}
+
+static int[] Convert_Bin_to_DP(bool[] bn)
+{
+    int[] dp = new int[4];
+
+    for (int i = 0; i < 4; i++)
+    {
+        int otetto = 0;
+
+        for (int j = 0; j < 8; j++)
+        {
+            int pos = (i * 8) + j;
+            if (bn[pos] != false)
+            otetto = otetto + (int)Math.Pow(2, 7 - j);
+        }
+
+        dp[i] = otetto;
+    }
+    return dp;
+}
     }
 }
